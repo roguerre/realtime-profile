@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <section class="section columns">
+        <div class="column is-4">
+          <div class="card">
+            <card-image :image="image"></card-image>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-4">{{ name }}</p>
+                </div>
+              </div>
+              <div class="content">
+                <p>{{ description }}</p>
+                <hr />
+                {{ numberOfInterests }}
+                <hr />
+                <div class="tags">
+                  <span
+                    class="tag"
+                    v-for="interest in interests"
+                    :key="interest.id"
+                  >
+                    {{ interest.title }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="field">
+            <div class="control">
+              <label>Name</label><br />
+              <input class="input" v-model="name" />
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <label>Description</label><br />
+              <textarea class="textarea" v-model="description"></textarea>
+            </div>
+          </div>
+          <add-interest @change="addInterest"></add-interest>
+        </div>
+      </section>
+    </div>
+    <script>
+      Vue.component("card-image", {
+        props: {
+          image: String,
+        },
+        template: `
+        <div class="card-image">
+          <div class="image is-4by3">
+            <img :src="image" />
+          </div>
+        </div>
+        `,
+      });
+      Vue.component("add-interest", {
+        template: `
+        <div class="field is-grouped">
+          <div class="control">
+            <input v-model="interest" class="input" />
+          </div>
+          <div class="control">
+            <button @click="addInterest" class="button">Add</button>
+          </div>
+        </div>
+        `,
+        data: function () {
+          return {
+            interest: null,
+          };
+        },
+        methods: {
+          addInterest: function () {
+            this.$emit("change", this.interest);
+            this.interest = null;
+          },
+        },
+      });
+      const app = new Vue({
+        el: "#app",
+        data: {
+          name: "Vue Hero",
+          description: "I'm the description for Vue Hero",
+          image: "https://bulma.io/images/placeholders/1280x960.png",
+          interests: [
+            { id: 1, title: "Vue" },
+            { id: 2, title: "JS" },
+            { id: 3, title: "HTML" },
+          ],
+          interest: null,
+        },
+        computed: {
+          numberOfInterests: function () {
+            return `Number of interests ${this.interests.length}`;
+          },
+        },
+        methods: {
+          addInterest: function (interest) {
+            this.interests.push({
+              id: this.interests.length + 1,
+              title: interest,
+            });
+          },
+        },
+      });
+    </script>
+    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+  </body>
+</html>

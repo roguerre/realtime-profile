@@ -10,7 +10,7 @@ introductorio a **Vue.js**. En el mismo se abordan los siguiente temas:
 - Formularios
 - Binding de eventos
 
-Como framework de CSS se hace uso de **Bulma**
+Como framework de CSS se hace uso de [**Bulma**](https://bulma.io/)
 
 ## Mis adiciones
 

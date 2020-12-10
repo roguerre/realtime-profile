@@ -12,8 +12,9 @@
   </head>
   <body>
     <div id="app">
-      <section class="section columns">
-        <div class="column is-4">
+      <h1 class="is-size-2 has-text-centered">Perfil de desarrollador web</h1>
+      <div class="columns">
+        <section class="section column">
           <div class="card">
             <card-image :image="image"></card-image>
             <div class="card-content">
@@ -39,25 +40,57 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="column is-6">
+        </section>
+        <section class="section column">
           <div class="field">
             <div class="control">
-              <label>Name</label><br />
+              <label>Nombre</label><br />
               <input class="input" v-model="name" />
             </div>
           </div>
           <div class="field">
             <div class="control">
-              <label>Description</label><br />
+              <label>Descripción</label><br />
               <textarea class="textarea" v-model="description"></textarea>
             </div>
           </div>
           <add-interest @change="addInterest"></add-interest>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
     <script>
+      Vue.component("profile-card", {
+        props: {
+          name: String,
+          image: String,
+          imageAlt: String,
+          description: String,
+        },
+        template: `
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-title">
+              {{ name }}
+            </div>
+            <div class="card-header-icon">
+              <span class="icon">
+                <i class="fas fa-id-card"></i>
+              </span>
+            </div>
+          </div>
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <img :src="image" :alt="imageAlt" />
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="content">
+              {{ description }}
+            </div>
+          </div>
+        </div>
+        `
+      })
       Vue.component("card-image", {
         props: {
           image: String,
@@ -99,6 +132,7 @@
           name: "Vue Hero",
           description: "I'm the description for Vue Hero",
           image: "https://bulma.io/images/placeholders/1280x960.png",
+          imageAlt: "Placeholder image",
           interests: [
             { id: 1, title: "Vue" },
             { id: 2, title: "JS" },

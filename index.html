@@ -15,31 +15,12 @@
       <h1 class="is-size-2 has-text-centered">Perfil de desarrollador web</h1>
       <div class="columns">
         <section class="section column">
-          <div class="card">
-            <card-image :image="image"></card-image>
-            <div class="card-content">
-              <div class="media">
-                <div class="media-content">
-                  <p class="title is-4">{{ name }}</p>
-                </div>
-              </div>
-              <div class="content">
-                <p>{{ description }}</p>
-                <hr />
-                {{ numberOfInterests }}
-                <hr />
-                <div class="tags">
-                  <span
-                    class="tag"
-                    v-for="interest in interests"
-                    :key="interest.id"
-                  >
-                    {{ interest.title }}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <profile-card
+            :name="name"
+            :image="image"
+            :imageAlt="imageAlt"
+            :description="description"
+          ></profile-card>
         </section>
         <section class="section column">
           <div class="field">
@@ -89,18 +70,6 @@
             </div>
           </div>
         </div>
-        `
-      })
-      Vue.component("card-image", {
-        props: {
-          image: String,
-        },
-        template: `
-        <div class="card-image">
-          <div class="image is-4by3">
-            <img :src="image" />
-          </div>
-        </div>
         `,
       });
       Vue.component("add-interest", {
@@ -130,9 +99,9 @@
         el: "#app",
         data: {
           name: "Vue Hero",
-          description: "I'm the description for Vue Hero",
           image: "https://bulma.io/images/placeholders/1280x960.png",
           imageAlt: "Placeholder image",
+          description: "I'm the description for Vue Hero",
           interests: [
             { id: 1, title: "Vue" },
             { id: 2, title: "JS" },

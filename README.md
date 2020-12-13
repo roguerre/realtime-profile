@@ -17,3 +17,4 @@ Como framework de CSS se hace uso de [**Bulma**](https://bulma.io/)
 - La imagen del perfil se selecciona y se muestra (selección desde el dispositivo o desde
   una URL de la web)
 - El usuario puede escoger insignias desde una lista predeterminada
+- Nuevo componente que comprende la presentacion personal del usuario
